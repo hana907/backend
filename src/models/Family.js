@@ -1,33 +1,32 @@
+// models/Family.js
 import mongoose from "mongoose";
 
-// models/Family.js
 
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
-
-const FamilySchema = new Schema({
-    
+const FamilySchema = new mongoose.Schema({
   familyName: {
     type: String,
     required: true,
   },
   adminId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User', // The creator of the family group
-    
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
   adminRelation: {
     type: String,
-    enum: ['family', 'friend', 'partner'], // You can add more if needed
-    default: 'family', // default relation
+    enum: ['parent', 'sibling', 'grandparent', 'caregiver', 'other'], // More relevant options
+    required: true,
   },
   carrierId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Carrier', // Optional: this could represent a health/social worker
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Carrier',
   },
-}, { timestamps: true }); // This adds createdAt and updatedAt automatically
+  members: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }],
+}, { timestamps: true });
 
 
-
-module.exports = mongoose.model('Family', FamilySchema);
+export default mongoose.model('Family', FamilySchema);
 

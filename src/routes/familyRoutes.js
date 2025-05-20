@@ -1,15 +1,11 @@
 // routes/familyRoutes.js
 import express from "express";
-import { createGroup } from '../controllers/createGroup.js';
-// import authMiddleware from '../middleware/auth.middleware';
-
-
+import { createFamily, addFamilyMembers } from '../controllers/familyController.js';
+import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
-const { createFamily } = require('../controllers/familyController');
-const authMiddleware = require('../middlewares/authMiddleware'); // assuming you have JWT middleware
 
-// Route to create a family
-router.post('/createGroup', authMiddleware, createGroup);
+router.post('/create', authMiddleware, createFamily); // Step 2
+router.post('/add-members', authMiddleware, addFamilyMembers); // Step 3
 
-module.exports = router;
+export default router;

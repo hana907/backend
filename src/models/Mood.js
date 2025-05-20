@@ -1,9 +1,8 @@
-import mongoose from 'mongoose';
 // models/Mood.js
+import mongoose from 'mongoose';
 
-
-const mongoose = require('mongoose');
 const { Schema } = mongoose;
+
 
 const MoodSchema = new Schema({
   carrierId: {
@@ -39,4 +38,5 @@ const MoodSchema = new Schema({
   },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Mood', MoodSchema);
+const Mood = mongoose.model('Mood', MoodSchema);
+export default Mood;

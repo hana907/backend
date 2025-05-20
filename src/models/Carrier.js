@@ -1,17 +1,12 @@
+// models/Carrier.js
 import mongoose from "mongoose";
 
 
-// models/Carrier.js
-
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
-
-const CarrierSchema = new Schema({
-
+const CarrierSchema = new mongoose.Schema({
   familyId: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Family',
-    required: true,
+    default: null,
   },
   name: {
     type: String,
@@ -33,8 +28,7 @@ const CarrierSchema = new Schema({
     type: String,
     default: '',
   },
-}, { timestamps: true }); // adds createdAt and updatedAt
-
-module.exports = mongoose.model('Carrier', CarrierSchema);
+}, { timestamps: true });
 
 
+export default mongoose.model('Carrier', CarrierSchema);

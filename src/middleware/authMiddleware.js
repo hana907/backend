@@ -1,4 +1,4 @@
-// middlewares/authMiddleware.js
+// middleware/authMiddleware.js
 import jwt from "jsonwebtoken";
 
 
@@ -6,14 +6,13 @@ const authMiddleware = (req, res, next) => {
   // Get the token from Authorization header
   const token = req.headers['authorization']?.split(' ')[1]; // Format: 'Bearer <token>'
 
-  if (!token) {
-    return res.status(403).json({ message: 'No token provided, access denied.' });
-  }
+  if (!token) return res.status(403).json({ message: 'No token provided, access denied.' });
+  
 
   try {
     // Verify the token
-    const decoded = jwt.verify(token, 'SECRET_KEY'); // Use your actual secret key
-
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Use your actual secret key
+    
     // Attach the decoded user information to the request object
     req.user = decoded;
     next(); // Pass the request to the next middleware or route handler
@@ -22,4 +21,4 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+export default authMiddleware;
