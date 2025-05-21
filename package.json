@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node updateUsers.js"
+    "start": "node index.js"
   },
   "type": "module",
   "dependencies": {
